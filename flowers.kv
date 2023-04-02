@@ -1,0 +1,14 @@
+#:kivy 2.1.0
+#:import Label kivy.uix.label.Label
+#:import Button kivy.uix.button.Button
+
+<FlowerDelivery>:
+    do_default_tab: False
+    TabbedPanelItem:
+        text: 'Каталог'
+        content: root.on_press_flower(self)
+
+    TabbedPanelItem:
+        text: "Корзина"
+    TabbedPanelItem:
+        text: "Вход"
