@@ -8,9 +8,11 @@ from kivymd.app import MDApp
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivymd.app import MDApp
-
+import multiprocessing
 from Data_base import DataOutput
+from login import LoginApp
 from sql_request import sql_request_name_flower
+
 
 flowers_data = DataOutput(sql_request_name_flower)
 
@@ -33,14 +35,20 @@ class FlowerDelivery(TabbedPanel):
     def on_press_buy(self, instance):
         pass
 
-    def on_press_login(self, instance):
-        kv_file = Builder.load_file('login.kv')
+    def on_press_login(self, button):
+        app = LoginApp()
+        p = multiprocessing.Process(target=app.run)
+        p.start()
+    # def on_press_login(self, instance):
+    #     LoginApp()
 
 
 class FlowersApp(App):
     def build(self):
-        self.flower = 'Роза'
         return FlowerDelivery()
+        return Builder.load_file('flowers.kv')
+
+
 
 
 if __name__ == '__main__':

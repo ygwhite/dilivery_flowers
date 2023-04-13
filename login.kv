@@ -74,13 +74,14 @@
 
         MDTextField:
             mode: "round"
-            id: user
+            id: name
             hint_text: "name"
             icon_right: "account"
             size_hint_x: None
             width: 200
             font_size: 18
             pos_hint: {"center_x": 0.5}
+
 
         MDTextField:
             mode: "round"
@@ -107,10 +108,11 @@
             text: "Register"
             font_size: 12
             pos_hint: {"center_x": 0.5}
-            on_press: app.logger()
+            on_press: root.registration()
 
         MDRoundFlatButton:
             text: "Log in to an existing account?"
             font_size: 12
             pos_hint: {"center_x": 0.5}
+            on_press: root.manager.current = 'log_menu'
 
