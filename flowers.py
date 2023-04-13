@@ -4,20 +4,21 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.lang.builder import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivymd.app import MDApp
 import multiprocessing
 from Data_base import DataOutput
-from login import LoginApp
+from login import LoginScreen, RegisterMenuScreen
 from sql_request import sql_request_name_flower
 
 
 flowers_data = DataOutput(sql_request_name_flower)
 
 
-class FlowerDelivery(TabbedPanel):
+class FlowerDelivery(Screen):
 
     def on_press_flower(self, instance):
         grid = GridLayout(cols=2)
@@ -35,18 +36,18 @@ class FlowerDelivery(TabbedPanel):
     def on_press_buy(self, instance):
         pass
 
-    def on_press_login(self, button):
-        app = LoginApp()
-        p = multiprocessing.Process(target=app.run)
-        p.start()
-    # def on_press_login(self, instance):
-    #     LoginApp()
 
 
-class FlowersApp(App):
+class FlowersApp(MDApp):
     def build(self):
-        return FlowerDelivery()
-        return Builder.load_file('flowers.kv')
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "DeepPurple"
+        sm = ScreenManager()
+        sm.add_widget(FlowerDelivery(name='flower_app'))
+        sm.add_widget(LoginScreen(name='log_menu'))
+        sm.add_widget(RegisterMenuScreen(name='register_menu'))
+        return sm
+
 
 
 
