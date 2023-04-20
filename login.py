@@ -1,53 +1,40 @@
 from kivy.app import App
 from kivy.lang import Builder
 import psycopg2
-from configBD import host, db_name, password, user
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.app import MDApp
-
+from kivy.uix.label import Label
 from Data_base import DataOutput
-
-
-
-sql_request_add_flower = (
-                    """INSERT INTO users (name, username, email, password) 
-                                        VALUES (%s, %s, %s, %s);"""
-)
-
-
-class RegData:
-
-    def __init__(self, sql_request, name, username, email, password_user):
-        self.connection = psycopg2.connect(
-            host=host,
-            database=db_name,
-            user=user,
-            password=password
-        )
-        try:
-            with self.connection.cursor() as cursor:
-                cursor.execute(
-                    sql_request, (name, username, email, password_user)
-                )
-                self.connection.commit()
-                # self.list_flower = cursor.fetchall()
-
-
-
-        finally:
-            if self.connection:
-                self.connection.close()
+from login_sql import RegData, SearchEmailAndUsername
 
 
 class LoginScreen(Screen):
     pass
 
 
+customer = None
+
+
 class RegisterMenuScreen(Screen):
     def registration(self):
+        global customer
+        response_reg = SearchEmailAndUsername(self.ids.email.text, self.ids.user.text)
         print(self.ids.name.text)
-        RegData(sql_request_add_flower, self.ids.name.text, self.ids.user.text, self.ids.email.text, self.ids.password.text)
-        print('Регистрация прошла успешно!')
+        if "Accepted!" == response_reg.response:
+            customer = RegData(self.ids.name.text, self.ids.user.text, self.ids.email.text, self.ids.password.text)
+            print('Регистрация прошла успешно!')
+            button = self.ids.Register
+            button.callback = self.manager.current = 'flower_app'
+            flower_delivery = self.manager.get_screen('flower_app')
+            username = flower_delivery.ids['Username']
+            customer = str(customer.id_user[0][1])
+            username.text = customer
+
+
+        else:
+            button = self.ids.welcome_label
+            button.text = "Такой аккаунт уже есть("
+            print('Этот аккаунт уже существует!')
 
 
 class LoginApp(MDApp):

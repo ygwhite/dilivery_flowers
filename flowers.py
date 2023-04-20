@@ -11,7 +11,7 @@ from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivymd.app import MDApp
 import multiprocessing
 from Data_base import DataOutput
-from login import LoginScreen, RegisterMenuScreen
+from login import LoginScreen, RegisterMenuScreen, customer
 from sql_request import sql_request_name_flower
 
 
@@ -35,8 +35,6 @@ class FlowerDelivery(Screen):
 
     def on_press_buy(self, instance):
         pass
-
-
 
 class FlowersApp(MDApp):
     def build(self):

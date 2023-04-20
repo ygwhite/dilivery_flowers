@@ -13,9 +13,17 @@
         TabbedPanelItem:
             text: "Мой аккаунт"
             Screen:
-                Button:
-                    text: "Войти"
-                    on_press: root.manager.current = 'log_menu'
+                BoxLayout:
+                    Label:
+                        id: Username
+                        text: "Новый пользователь"
+                        size_hint: (0.5, 0.25)
+                        #pos_hint: {'center_x': 0.5, 'center_y': 1}
+                    Button:
+                        text: "Войти"
+                        on_press: root.manager.current = 'log_menu'
+                        size_hint: (0.5, 0.25)
+                        #pos_hint: {'center_x': 0.5, 'center_y': 0.5}
 
 <LoginScreen>:
     MDCard:
@@ -67,6 +75,11 @@
             font_size: 12
             pos_hint: {"center_x": 0.5}
             on_press: root.manager.current = 'register_menu'
+        MDRoundFlatButton:
+            text: "Back to flowers magazine"
+            font_size: 12
+            pos_hint: {"center_x": 0.5}
+            on_press: root.manager.current = 'flower_app'
 
         Widget:
             size_hint_y: None
@@ -134,6 +147,7 @@
             password: True
 
         MDRoundFlatButton:
+            id: Register
             text: "Register"
             font_size: 12
             pos_hint: {"center_x": 0.5}
