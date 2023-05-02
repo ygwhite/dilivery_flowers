@@ -13,11 +13,12 @@ class LoginScreen(Screen):
 
 
 customer = None
-
+user_cart_id = None
 
 class RegisterMenuScreen(Screen):
     def registration(self):
         global customer
+        global user_cart_id
         response_reg = SearchEmailAndUsername(self.ids.email.text, self.ids.user.text)
         print(self.ids.name.text)
         if "Accepted!" == response_reg.response:
@@ -27,6 +28,7 @@ class RegisterMenuScreen(Screen):
             button.callback = self.manager.current = 'flower_app'
             flower_delivery = self.manager.get_screen('flower_app')
             username = flower_delivery.ids['Username']
+            user_cart_id = customer.id_user_cart[0][0]
             customer = str(customer.id_user[0][1])
             username.text = customer
 

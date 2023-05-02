@@ -14,7 +14,6 @@ from Data_base import DataOutput
 from login import LoginScreen, RegisterMenuScreen, customer
 from sql_request import sql_request_name_flower
 
-
 flowers_data = DataOutput(sql_request_name_flower)
 
 
@@ -23,18 +22,24 @@ class FlowerDelivery(Screen):
     def on_press_flower(self, instance):
         grid = GridLayout(cols=2)
         for flower in range(len(flowers_data.list_flower)):
-            self.flower_list = Button(
-                text=f"Купить:\n{flowers_data.list_flower[flower][0]}\nЦена: {flowers_data.list_flower[flower][3]}",
-                font_size=20, on_press=self.on_press_buy)
+            flower_list = Button(
+                text=f"Купить:\n{flowers_data.list_flower[flower][1]}\nЦена: {flowers_data.list_flower[flower][4]}",
+                font_size=20, on_press=self.on_press_buy_factory(flowers_data.list_flower[flower][0]))
+            self.ids['test'] = flower_list
             img = Image(
                 source='C:\\Users\\vasya\\Downloads\\1630656867_47-oir-mobi-p-tyulpani-kazakhstana-tsveti-krasivo-foto-53.jpg',
                 size_hint=(1, 1))
             grid.add_widget(img)
-            grid.add_widget(self.flower_list)
+            grid.add_widget(flower_list)
+            print(flower)
         return grid
 
-    def on_press_buy(self, instance):
-        pass
+    def on_press_buy_factory(self, id):
+        return lambda instance: self.on_press_buy(id)
+
+    def on_press_buy(self, id):
+        print(id)
+
 
 class FlowersApp(MDApp):
     def build(self):
@@ -45,9 +50,6 @@ class FlowersApp(MDApp):
         sm.add_widget(LoginScreen(name='log_menu'))
         sm.add_widget(RegisterMenuScreen(name='register_menu'))
         return sm
-
-
-
 
 
 if __name__ == '__main__':

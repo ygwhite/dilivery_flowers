@@ -8,8 +8,8 @@ class RegData:
         self.connection = psycopg2.connect(
             host=host,
             database=db_name,
-            user=user_data,
-            password=password
+            user=user,
+            password=password,
         )
         try:
             with self.connection.cursor() as cursor:

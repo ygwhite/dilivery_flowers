@@ -14,7 +14,7 @@ class RegData:
         self.connection = psycopg2.connect(
             host=host,
             database=db_name,
-            user=user_data,
+            user=user,
             password=password
         )
         try:
@@ -31,6 +31,10 @@ class RegData:
                     """INSERT INTO cart (user_id) VALUES (%s);""",
                     (self.id_user[0][0],)
                 )
+                cursor.execute(
+                    "SELECT id FROM cart WHERE (user_id = %s)", (self.id_user[0][0],)
+                )
+                self.id_user_cart = cursor.fetchall()
                 self.connection.commit()
                 # self.list_flower = cursor.fetchall()
 
