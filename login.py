@@ -15,6 +15,7 @@ class LoginScreen(Screen):
 customer = None
 user_cart_id = None
 
+
 class RegisterMenuScreen(Screen):
     def registration(self):
         global customer
@@ -31,7 +32,6 @@ class RegisterMenuScreen(Screen):
             user_cart_id = customer.id_user_cart[0][0]
             customer = str(customer.id_user[0][1])
             username.text = customer
-
 
         else:
             button = self.ids.welcome_label

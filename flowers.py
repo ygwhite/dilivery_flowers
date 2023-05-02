@@ -10,8 +10,9 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.tabbedpanel import TabbedPanel, TabbedPanelItem
 from kivymd.app import MDApp
 import multiprocessing
+from login import LoginScreen, RegisterMenuScreen, customer, user_cart_id
 from Data_base import DataOutput
-from login import LoginScreen, RegisterMenuScreen, customer
+from add_flower_to_cart_sql import add_flower_to_cart
 from sql_request import sql_request_name_flower
 
 flowers_data = DataOutput(sql_request_name_flower)
@@ -38,7 +39,11 @@ class FlowerDelivery(Screen):
         return lambda instance: self.on_press_buy(id)
 
     def on_press_buy(self, id):
-        print(id)
+        from login import user_cart_id
+        print(user_cart_id)
+        result = add_flower_to_cart(id, user_cart_id, 1)
+        print('Товар добавлен!')
+        print(result.id_cart_flower)
 
 
 class FlowersApp(MDApp):
