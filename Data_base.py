@@ -31,12 +31,5 @@ class DataOutput:
 
 a = DataOutput(sql_request_name_flower)
 
-# class AddFlowerToCart(DataOutput):
-#     def __init__(self, sql_request, cart_id, flower_id, quantity):
-#         super().__init__()
-# d = DataOutput(sql_request_list_flower)
-# for i in d.flower_list:
-#     print(list(d.flower_list))
-
 for i in range(len(a.list_flower)):
     print(a.list_flower[i][i])

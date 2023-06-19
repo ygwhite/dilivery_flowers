@@ -31,30 +31,7 @@ class CartFlowerUser:
                 self.connection.close()
 
 
-# class DeleteFlower:
-#
-#     def __init__(self, username):
-#         self.connection = psycopg2.connect(
-#             host=host,
-#             database=db_name,
-#             user=user,
-#             password=password,
-#         )
-#         try:
-#             with self.connection.cursor() as cursor:
-#                 cursor.execute(
-#                     "DELETE FROM cart_user WHERE id = 123;",
-#                     (username,)
-#                 )
-#                 self.cart_user_flower = cursor.fetchall()
-#                 self.connection.commit()
-#                 # self.list_flower = cursor.fetchall()
-#
-#
-#
-#         finally:
-#             if self.connection:
-#                 self.connection.close()
+
 
 a = CartFlowerUser('dasfwe')
 print(a.cart_user_flower)

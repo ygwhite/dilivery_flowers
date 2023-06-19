@@ -1,10 +1,8 @@
 from kivy.core.text import Label
 from kivy.uix.image import Image
-from kivy.uix.button import Button
 from kivy.uix.screenmanager import Screen
 from kivy.uix.gridlayout import GridLayout
 
-from add_flower_to_cart_sql import add_flower_to_cart
 from cart_sql import CartFlowerUser
 
 
