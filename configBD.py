@@ -1,4 +1,4 @@
-host = "127.0.0.1"
-user = "postgres"
-password = "SUSLIK12"
-db_name = "LEARN"
+host = ""
+user = ""
+password = ""
+db_name = ""
